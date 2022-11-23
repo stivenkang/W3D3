@@ -69,12 +69,33 @@ def fib_recursive(n)
     return [] if n == 0
     return [0] if n == 1
     return [0, 1] if n == 2
-    sequence = [0, 1]
 
-    sequence += fib_recursive(n - 1)[-1] + fib_recursive(n - 2)[-1]
-    sequence
+    fib_recursive(n-1) << fib_recursive(n - 1)[-1] + fib_recursive(n - 2)[-1]
+
     # 3: [0, 1, 1]
     # 4: [0, 1, 1, 2]
-
+    # 5: [0, 1, 1, 2, 3]
 end
-p fib_recursive(3)
+# p fib_recursive(5)
+
+
+def bsearch(arr, num)
+    # return nil if !arr.include?(num)
+    return nil if arr.length <= 0
+    return arr.length / 2 if arr[arr.length / 2] == num
+    return nil if arr.length == 1 && arr[0] != num
+
+    if num < arr[arr.length / 2]
+        return bsearch(arr[0...arr.length / 2], num)
+    else
+        return (arr.length / 2) + bsearch(arr[arr.length / 2..-1], num)
+    end
+end
+
+p bsearch([1, 2, 3], 1) # => 0
+p bsearch([2, 3, 4, 5], 3) # => 1
+p bsearch([2, 4, 6, 8, 10], 6) # => 2
+p bsearch([1, 3, 4, 5, 9], 5) # => 3
+p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
+p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
+p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
