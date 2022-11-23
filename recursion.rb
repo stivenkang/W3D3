@@ -35,4 +35,18 @@ def exp_2(b, n)
     end
 end
 
-# p exp_2(2,5)
+def deep_dup(arr)
+    new_arr = []
+    return new_arr += arr if arr.all? { |ele| !ele.is_a?(Array) }
+    arr.each do |ele|
+        new_arr << deep_dup(ele)
+    end
+    return new_arr
+end
+
+arr = [
+    ["nuts", "bolts", "washers"],
+    ["capacitors", "resistors", "inductors"]
+  ]
+p deep_dup(arr)[1] << "leds"
+p arr
