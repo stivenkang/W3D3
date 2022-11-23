@@ -44,9 +44,37 @@ def deep_dup(arr)
     return new_arr
 end
 
-arr = [
-    ["nuts", "bolts", "washers"],
-    ["capacitors", "resistors", "inductors"]
-  ]
-p deep_dup(arr)[1] << "leds"
-p arr
+# arr = [
+#     ["nuts", "bolts", "washers"],
+#     ["capacitors", "resistors", "inductors"]
+#   ]
+# p deep_dup(arr)[1] << "leds"
+# p arr
+
+def fib_iterative(n)    # next = previous 2 added up
+    return [0] if n == 1
+    return [0, 1] if n == 2
+    sequence = [0, 1]
+
+    i = 1
+    while i <= n
+        sequence << sequence[i] + sequence[i - 1]
+        i += 1
+    end
+    sequence[0...n]
+end
+# p fib_iterative(5)
+
+def fib_recursive(n)
+    return [] if n == 0
+    return [0] if n == 1
+    return [0, 1] if n == 2
+    sequence = [0, 1]
+
+    sequence += fib_recursive(n - 1)[-1] + fib_recursive(n - 2)[-1]
+    sequence
+    # 3: [0, 1, 1]
+    # 4: [0, 1, 1, 2]
+
+end
+p fib_recursive(3)
